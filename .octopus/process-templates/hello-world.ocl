@@ -1,2 +1,35 @@
 name = "Hello World!"
 description = "Example - Write out hello world!"
+
+icon {
+    color = "#1A77CA"
+    id = "comment-alt-smile"
+}
+
+parameter "Worker.Pool.Name" {
+    display_settings = {
+        Octopus.ControlType = "WorkerPool"
+    }
+    help_text = "This is some help text"
+    label = ""
+}
+
+step "start-write-out-message" {
+    name = "Start - Write out message!"
+
+    action {
+        action_type = "Octopus.Script"
+        is_required = true
+        properties = {
+            Octopus.Action.RunOnServer = "true"
+            Octopus.Action.Script.ScriptBody = <<-EOT
+                Write-Highlight "Hello World!"
+                Write-Highlight "Deployed to Environment: #{Octopus.Environment.Name}"
+                EOT
+            Octopus.Action.Script.ScriptSource = "Inline"
+            Octopus.Action.Script.Syntax = "PowerShell"
+            OctopusUseBundledTooling = "False"
+        }
+        worker_pool_variable = "#{Worker.Pool.Name}"
+    }
+}
