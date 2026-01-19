@@ -1,0 +1,2 @@
+name = "Deploy Process - Scan SBOM and Build Artifacts"
+description = "A process template that scans SBOM and any docker containers any known critical or high vulnerabilities, and verifies the attestation of the build artifacts."
