@@ -1,2 +1,2 @@
 # public-repo-template
-This is a public repository template for use on GitHub.
+Process templates are a group of reusable steps for projects, stored in a Git repository by Platform Hub from Octopus Deploy.
