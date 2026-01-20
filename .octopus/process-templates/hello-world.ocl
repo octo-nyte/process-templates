@@ -1,4 +1,4 @@
-name = "Hello World!"
+name = "Deploy Process - Hello World!"
 description = "Example - Write out hello world!"
 
 icon {
