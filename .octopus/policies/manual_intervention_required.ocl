@@ -1,0 +1,18 @@
+name = "Manual Intervention Required"
+violation_action = "block"
+
+conditions {
+    rego = <<-EOT
+            package manual_intervention_required
+            
+            default result := {"allowed": true}
+            EOT
+}
+
+scope {
+    rego = <<-EOT
+            package manual_intervention_required
+            
+            default evaluate := true
+            EOT
+}
