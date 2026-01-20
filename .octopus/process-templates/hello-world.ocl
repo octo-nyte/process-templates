@@ -11,7 +11,7 @@ parameter "Worker.Pool.Name" {
         Octopus.ControlType = "WorkerPool"
     }
     help_text = "This is some help text"
-    label = ""
+    label = "Worker Pool"
 }
 
 step "start-write-out-message" {
