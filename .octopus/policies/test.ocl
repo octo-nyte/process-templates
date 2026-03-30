@@ -1,0 +1,37 @@
+name = "test"
+violation_action = "block"
+
+conditions {
+    rego = <<-EOT
+            package test
+            
+            # Default: Allow all deployments
+            default result := {"allowed": true}
+            
+            # Deny: Block deployments using specific execution trigger logic
+            result := {"allowed": false} if {
+            	some execution in input.Execution
+            	
+            	# Check if the execution is set to start automatically with the previous step
+            	execution.StartTrigger == "StartWithPrevious"
+            }
+            EOT
+}
+
+scope {
+    rego = <<-EOT
+            package test
+            
+            default evaluate := true
+            
+            # The following are examples of available scoping options:
+            # evaluate if {    
+            	# Scope evaluation by Environment name    
+            	# input.Environment.Name == "<environment-name>"    
+            	# Scope evaluation to Space Id    
+            	# input.Space.Id == "<space-id>"
+            	# Scope evaluation to multiple Spaces
+                # input.Project.Slug in ["<project-slug>", "<project-slug2>"]
+            # }
+            EOT
+}
