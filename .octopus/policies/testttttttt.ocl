@@ -1,0 +1,35 @@
+name = "testttttttt"
+violation_action = "block"
+
+conditions {
+    rego = <<-EOT
+            package testttttttt
+            
+            # Default: Deny all runbook executions
+            default result := {"allowed": false}
+            
+            # Allow: If the runbook originates from a specific Git reference
+            result := {"allowed": true} if {
+            	# Validate that the runbook version matches the required branch or tag
+            	input.Runbook.GitRef == "<Runbook-GitRef>"
+            }
+            EOT
+}
+
+scope {
+    rego = <<-EOT
+            package testttttttt
+            
+            default evaluate := true
+            
+            # The following are examples of available scoping options:
+            # evaluate if {    
+            	# Scope evaluation by Environment name    
+            	# input.Environment.Name == "<environment-name>"    
+            	# Scope evaluation to Space Id    
+            	# input.Space.Id == "<space-id>"
+            	# Scope evaluation to multiple Spaces
+                # input.Project.Slug in ["<project-slug>", "<project-slug2>"]
+            # }
+            EOT
+}
